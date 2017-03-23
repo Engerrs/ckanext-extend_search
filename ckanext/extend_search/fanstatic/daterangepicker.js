@@ -24,7 +24,7 @@
         this.showWeekNumbers = false;
         this.timePicker = false;
         this.timePickerIncrement = 30;
-        this.timePicker12Hour = true;
+        this.timePicker12Hour = false;
         this.ranges = {};        
         this.opens = 'right';
 
@@ -32,7 +32,7 @@
         this.applyClass = 'btn-success';
         this.cancelClass = 'btn-default';
 
-        this.format = 'MM/DD/YYYY';
+        this.format = 'DD/MM/YYYY';
         this.separator = ' - ';
 
         this.locale = {
@@ -687,8 +687,8 @@
             monthHtml += "</select>";
 
             var currentYear = selected.year();
-            var maxYear = (maxDate && maxDate.year()) || (currentYear + 5);
-            var minYear = (minDate && minDate.year()) || (currentYear - 50);
+            var maxYear = (maxDate && maxDate.year()) || (currentYear + 0);
+            var minYear = (minDate && minDate.year()) || (currentYear - 100);
             var yearHtml = '<select class="yearselect">'
 
             for (var y = minYear; y <= maxYear; y++) {

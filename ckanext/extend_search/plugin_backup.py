@@ -46,7 +46,7 @@ class ExtendSearchPlugin(plugins.SingletonPlugin):
         if start_date and end_date:
             # Add a date-range query with the selected start and end dates into the
             # Solr facet queries.
-            fq = '{fq} +created:[{start_date} TO {end_date}]'.format(
+            fq = '{fq} +metadata_modified:[{start_date} TO {end_date}]'.format(
                 fq=fq, start_date=start_date, end_date=end_date)
 
         #Add creator (user) id query to the Solr facet queries

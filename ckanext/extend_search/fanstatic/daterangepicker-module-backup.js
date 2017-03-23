@@ -16,7 +16,6 @@ this.ckan.module('daterangepicker-module', function ($, _) {
             // Also populate the search facets for start/end date if we need to
             var ext_startdate = null;
             var ext_enddate = null;
-            var dateDisplayFormat = 'DD/MM/YYYY';
 
             if(getURLParameter("ext_startdate")) {
                 ext_startdate = new Date(getURLParameter("ext_startdate"));
@@ -26,7 +25,7 @@ this.ckan.module('daterangepicker-module', function ($, _) {
                 $('#ext_startdate').val(iso_start);
 
                 //Convert to Date string (for display purposes)
-                var startDateString = new moment(iso_start).format(dateDisplayFormat);
+                var startDateString = ext_startdate.toDateString();
                 $('#ext_startdate_after').text(startDateString);
             }
             if(getURLParameter("ext_enddate")) {
@@ -37,34 +36,34 @@ this.ckan.module('daterangepicker-module', function ($, _) {
                 $('#ext_enddate').val(iso_end);
 
                 //Convert to Date string (for display purposes)
-                var endDateString = new moment(iso_end).format(dateDisplayFormat);
+                var endDateString = ext_enddate.toDateString();
                 $('#ext_enddate_after').text(endDateString);
             }
 
             //Initialise the daterange picker textbox with the previously searched daterange
             if(ext_startdate && ext_enddate)
             {
-                var startDateString = $('#ext_startdate_after').text();
-                var endDateString = $('#ext_enddate_after').text();
+                var startDateString = ext_startdate.toDateString();
+                var endDateString = ext_enddate.toDateString();
                 $('#daterange').val(startDateString + ' - ' + endDateString);
             }
 
 
             // Add a date-range picker widget to the <input> with id #daterange
            $('input[id="daterange"]').daterangepicker({
-               // ranges: {
-               //    'Today': [moment().startOf('day'), moment().endOf('day')],
-               //    'Yesterday': [moment().startOf('day').subtract('days', 1), moment().endOf('day').subtract('days', 1)],
-               //    'Last 7 Days': [moment().startOf('day').subtract('days', 6), moment().endOf('day')],
-               //    'Last 30 Days': [moment().startOf('day').subtract('days', 29), moment().endOf('day')],
-               //    'This Month': [moment().startOf('month'), moment().endOf('month')],
-               //   'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')],
-               //   'Last Year': [moment().subtract('year', 1).startOf('year'), moment().subtract('year', 1).endOf('year')]
-               //},
+                ranges: {
+                   'Today': [moment().startOf('day'), moment().endOf('day')],
+                   'Yesterday': [moment().startOf('day').subtract('days', 1), moment().endOf('day').subtract('days', 1)],
+                   'Last 7 Days': [moment().startOf('day').subtract('days', 6), moment().endOf('day')],
+                   'Last 30 Days': [moment().startOf('day').subtract('days', 29), moment().endOf('day')],
+                   'This Month': [moment().startOf('month'), moment().endOf('month')],
+                   'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')],
+                   'Last Year': [moment().subtract('year', 1).startOf('year'), moment().subtract('year', 1).endOf('year')]
+                },
                 startDate: moment().startOf('day'),
                 endDate: moment().startOf('day'),
                 showDropdowns: true,
-                timePicker: false
+                timePicker: true
             },
             function(start, end) {
                 // Bootstrap-daterangepicker calls this function after the user
